@@ -75,4 +75,4 @@ public function scandir(){
         }
         $this->render($stock_path);
       }
-}
+    }
