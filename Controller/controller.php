@@ -21,7 +21,7 @@ class Controller {
 
         foreach ($check as $value){
             if ($value !=''){
-                $path_serv.= DIRECTORY_SEPARATOR.$value;
+                $path_serv.= $value;
             }
             if (is_dir($path_serv)){
                 $this->path_org = 'folder';
@@ -34,9 +34,7 @@ class Controller {
                     } else {
                         $this->path_org = 'file';
                         $this->setCurrentPath($path_serv);
-
                     }
-                   
                 }
                 else {
                     $errorpop = true;
@@ -54,7 +52,7 @@ public function scandir(){
     $path_serv = str_replace($_SERVER['DOCUMENT_ROOT'],'',$this->path);
     $stop= explode ('/', $path_serv);
     array_pop($stop);
-    $undo = BASE_URI.implode(DIRECTORY_SEPARATOR, $undo);
+    
   
     if($this->path_org == 'folder'){
         $scan = scandir($this->path);
@@ -63,24 +61,25 @@ public function scandir(){
         foreach($scan as $content){
           if($this->path == $_SERVER['DOCUMENT_ROOT']){
             if($content != '.' && $content != '..'){
-              $path = $path_serv.DIRECTORY_SEPARATOR.$content;
+              $path = $path_serv.$content;
               $stock_path[$path] = $content;
             }
           }
           else {
             if($content != '.' ){
-              $path = $path_serv.DIRECTORY_SEPARATOR.$content;
+              $path = $path_serv.$content;
               $stock_path[$path] = $content;
             }
           }
         }
         $this->render($stock_path);
       }
-    }
+}
     elseif($this->path_org == 'file'){
     echo '<a href="'.$stock_path.'"><div class="links"><p>Retour</p></div></a>';
     $date = file_get_contents($this->path);
-    $file = $_SERVER['DOCUMENT_ROOT'].BASE_URI.'/file.txt';
+
+    $file = $_SERVER['DOCUMENT_ROOT'].'/file.txt';
     $lock_file- fopen($file, "w");
     fclose($lock_file);
     $read_file= fopen($file, 'r+');
@@ -88,4 +87,5 @@ public function scandir(){
     echo '<div id ="file">'.file_get_contents($file).'</div>';
     fclose($read_file);
     }
-    
+  
+}
