@@ -44,9 +44,10 @@ class Controller {
                  }
             }
         } 
-        if ($errorpop == true) 
+        if ($errorpop == true)  {
             echo "<p> Impossible pour la recherche ".$message.".</p>";
             $this->scan_dir();
+        }
     
 } 
 public function scandir(){
@@ -56,10 +57,10 @@ public function scandir(){
     $undo = BASE_URI.implode(DIRECTORY_SEPARATOR, $undo);
   
     if($this->path_org == 'folder'){
-        $contents = scandir($this->path);
+        $scan = scandir($this->path);
         $stock_path = [];
   
-        foreach($contents as $content){
+        foreach($scan as $content){
           if($this->path == $_SERVER['DOCUMENT_ROOT']){
             if($content != '.' && $content != '..'){
               $path = $path_serv.DIRECTORY_SEPARATOR.$content;
@@ -76,3 +77,15 @@ public function scandir(){
         $this->render($stock_path);
       }
     }
+    elseif($this->path_org == 'file'){
+    echo '<a href="'.$stock_path.'"><div class="links"><p>Retour</p></div></a>';
+    $date = file_get_contents($this->path);
+    $file = $_SERVER['DOCUMENT_ROOT'].BASE_URI.'/file.txt';
+    $lock_file- fopen($file, "w");
+    fclose($lock_file);
+    $read_file= fopen($file, 'r+');
+    fwrite($read_file, $date);
+    echo '<div id ="file">'.file_get_contents($file).'</div>';
+    fclose($read_file);
+    }
+    
