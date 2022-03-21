@@ -1,6 +1,6 @@
 # Projet-my_H5ai
 Projet en cours sur 2 semaine : Indexeur de fichiers pour serveurs web HTTP.
-Début 07/03 deadline 21/03.
+
 
 
 <h1>COMPÉTENCES À ACQUÉRIR :</h1>
